@@ -12,18 +12,20 @@ class ProductController extends Controller
     public function index()
     {
         $user = auth()->user();
-
-        // Se for admin, retorna todos. Se for user, retorna apenas os dele.
-        $query = $user->role === 'admin'
+        
+        $query = ($user->role === 'admin')
             ? Product::query()
             : $user->products();
 
-        return ProductResource::collection($query->get());
+        $products = $query->select(['id', 'name', 'price', 'user_id'])
+                        ->latest()
+                        ->get();
+
+        return ProductResource::collection($products);
     }
 
     public function store(StoreProductRequest $request)
     {
-        // Criação vinculada ao user autenticado
         $product = auth()->user()->products()->create($request->validated());
         return new ProductResource($product);
     }
@@ -32,7 +34,6 @@ class ProductController extends Controller
     {
         $user = auth()->user();
 
-        // Apenas admin ou dono pode ver
         if ($user->role !== 'admin' && $product->user_id !== $user->id) {
             return response()->json(['message' => 'Acesso negado'], 403);
         }
@@ -44,7 +45,6 @@ class ProductController extends Controller
     {
         $user = auth()->user();
 
-        // Apenas admin ou dono pode editar
         if ($user->role !== 'admin' && $product->user_id !== $user->id) {
             return response()->json(['message' => 'Acesso negado'], 403);
         }
@@ -57,7 +57,6 @@ class ProductController extends Controller
     {
         $user = auth()->user();
 
-        // Apenas admin ou dono pode apagar
         if ($user->role !== 'admin' && $product->user_id !== $user->id) {
             return response()->json(['message' => 'Acesso negado'], 403);
         }
