@@ -9,7 +9,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject; // <--- Importante
 
 class User extends Authenticatable implements JWTSubject
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, SoftDeletes;
 
     protected $fillable = [
         'name', 'email', 'password','role'

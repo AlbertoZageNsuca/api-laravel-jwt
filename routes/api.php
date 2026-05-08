@@ -29,4 +29,9 @@ Route::middleware('auth:api')->group(function () {
         Route::get('users/{id}/products',          [UserController::class, 'products']);
         Route::put('users/{id}/role',              [UserController::class, 'updateRole']);
     });
+
+    Route::get('products/trashed', [ProductController::class, 'trashed']);
+    Route::put('products/{id}/restore', [ProductController::class, 'restore']);
+    Route::delete('products/{id}/force', [ProductController::class, 'forceDelete']);
+    
 });
