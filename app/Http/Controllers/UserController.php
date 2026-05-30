@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Resources\ProductResource;
 
+
 class UserController extends Controller
 {
     // Apenas Admin: Listar todos os utilizadores do sistema
