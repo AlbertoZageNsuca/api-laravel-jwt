@@ -60,7 +60,7 @@ return [
             'strict' => true,
             'engine' => null,
             'options' => [
-                PDO::MYSQL_ATTR_SSL_CA => null,
+                // PDO::MYSQL_ATTR_SSL_CA => null,
                 \PDO::ATTR_EMULATE_PREPARES => true,
             ],
         ],
