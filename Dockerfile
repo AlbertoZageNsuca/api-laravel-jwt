@@ -22,8 +22,7 @@ COPY . /var/www
 
 # Instala o Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-RUN composer install --no-interaction --optimize-autoloader --no-dev
-
+RUN composer install --no-interaction --optimize-autoloader --no-dev --no-scripts
 # Configura permissões
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 
