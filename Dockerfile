@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
+    libpq-dev \
     zip \
     unzip \
     nginx
@@ -26,5 +27,5 @@ RUN composer install --no-interaction --optimize-autoloader --no-dev
 # Configura permissões
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 
-# Expõe a porta e inicia o servidor (Render vai gerenciar a porta)
+# Expõe a porta e inicia o servidor
 CMD php artisan serve --host=0.0.0.0 --port=$PORT
