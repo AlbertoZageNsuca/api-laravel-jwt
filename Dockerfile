@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
     unzip \
     nginx
 
-RUN docker-php-ext-install pdo_mysql mbstring expc openssl
+RUN docker-php-ext-install pdo_pgsql
 
 # Configura o diretório de trabalho
 WORKDIR /var/www
